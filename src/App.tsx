@@ -18,6 +18,7 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { LocationsModal } from './components/LocationsModal';
 import { CompanyModal } from './components/CompanyModal';
 import { GasCalculatorModal } from './components/GasCalculatorModal';
+import { ChatbotWidget } from './components/ChatbotWidget';
 import { GasProduct } from './data/gasData';
 
 export default function App() {
@@ -51,6 +52,14 @@ export default function App() {
     const supportElement = document.getElementById('support');
     if (supportElement) {
       supportElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleQuoteFromChatbot = (topic: string) => {
+    setPrefilledProductForQuote(topic);
+    const inquiryElement = document.getElementById('inquiry');
+    if (inquiryElement) {
+      inquiryElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -150,6 +159,12 @@ export default function App() {
         isOpen={isCalculatorOpen}
         onClose={() => setIsCalculatorOpen(false)}
         lang={lang}
+      />
+
+      {/* 24/7 AI Gas Engineering Chatbot */}
+      <ChatbotWidget
+        lang={lang}
+        onRequestQuoteWithTopic={handleQuoteFromChatbot}
       />
     </div>
   );
